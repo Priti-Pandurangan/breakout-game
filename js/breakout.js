@@ -17,6 +17,27 @@ var paddleY = (canvas.height - paddleHeight)
 var rightPressed = false
 var leftPressed = false
 
+document.addEventListener("keydown", keyDownHandler)
+document.addEventListener("keyup", keyUpHandler)
+
+function keyDownHandler(event) {
+    if (event.keyCode == 39) {
+        rightPressed = true
+    }
+    else if(event.keyCode == 37) {
+        leftPressed = true
+    }
+}
+
+function keyUpHandler(event) {
+    if (event.keyCode == 39) {
+        rightPressed = false
+    }
+    else if (event.keyCode == 37) {
+        leftPressed = false
+    }
+}
+
 function drawBall() {
     ctx.beginPath()
     ctx.arc(x, y, ballRadius, 0, Math.PI * 2)
@@ -37,9 +58,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     drawBall()
-
-    x += dx
-    y += dy
+    drawPaddle()
 
     if (x + dx > canvas.width - ballRadius || x + dx< ballRadius) {
         dx = -dx
@@ -47,6 +66,16 @@ function draw() {
     if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
         dy = -dy
     }
+
+    if (rightPressed && paddleX < (canvas.width - paddleWidth)) { 
+            paddleX += 7
+    }
+    else if (leftPressed && paddleX > 0) { 
+        paddleX -= 7
+    } 
+
+    x += dx
+    y += dy
 }
 
 setInterval(draw, 10)
