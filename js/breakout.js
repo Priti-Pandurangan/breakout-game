@@ -25,7 +25,6 @@ var brickOffsetTop = 30
 var brickOffsetLeft = 30
 
 var score = 0
-var lives = 3
 
 var bricks = []
 for(c = 0; c < brickColumnCount; c++) {
@@ -120,12 +119,6 @@ function drawBricks() {
     }
 }
 
-function drawLives() {
-    ctx.font = "16px Arial"
-    ctx.fillStyle = "#12132B"
-    ctx.fillText("Lives: " +lives, canvas.width - 65, 20)
-}
-
 function drawScore() {
     ctx.font = "16px Arial"
     ctx.fillStyle = "#12132B"
@@ -139,7 +132,6 @@ function draw() {
     drawBall()
     drawPaddle()
     drawScore()
-    drawLives()
     collisionDetection()
     
 
@@ -156,19 +148,9 @@ function draw() {
             }
         }
         else {
-            lives--
-            if (!lives) {
                 alert("Game Over")
                 document.location.reload()
             }
-            else {
-                x = canvas.width / 2
-                y = canvas.height - 30
-                dx = 2
-                dy = -2
-                paddleX = (canvas.width - paddleWidth) / 2
-            }
-        }
     }
 
     if (rightPressed && paddleX < (canvas.width - paddleWidth)) { 
