@@ -24,9 +24,9 @@ var brickPadding = 10
 var brickOffsetTop = 30
 var brickOffsetLeft = 30
 
-var bricks = []
 var score = 0
 
+var bricks = []
 for(c = 0; c < brickColumnCount; c++) {
     bricks[c] = []
     for(r = 0; r < brickRowCount; r++) {
@@ -36,6 +36,7 @@ for(c = 0; c < brickColumnCount; c++) {
 
 document.addEventListener("keydown", keyDownHandler)
 document.addEventListener("keyup", keyUpHandler)
+document.addEventListener("mousemove", mouseMoveHandler)
 
 function keyDownHandler(event) {
     if (event.keyCode == 39) {
@@ -52,6 +53,13 @@ function keyUpHandler(event) {
     }
     else if (event.keyCode == 37) {
         leftPressed = false
+    }
+}
+
+function mouseMoveHandler(event) {
+    var relativeX = event.clientX - canvas.offsetLeft
+    if (relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth / 2
     }
 }
 
